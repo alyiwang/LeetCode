@@ -1,8 +1,10 @@
 package problems;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -23,7 +25,7 @@ public class WordLadder2 {
         if (graph.isEmpty())
             return paths;
 
-        paths.addAll(getPaths(start, end, graph));
+        paths.addAll(trace(start, end, graph));
         return paths;
     }
 
@@ -52,11 +54,9 @@ public class WordLadder2 {
                         if (t.equals(end))
                             foundEnd = true;
                         newLevel.add(t);
-                        if (!graph.containsKey(t)) {
-                            HashSet<String> parent = new HashSet<String>();
-                            parent.add(s);
-                            graph.put(t, parent);
-                        }
+                        if (!graph.containsKey(s))
+                            graph.put(s, new HashSet<String>());
+                        graph.get(s).add(t);
                     }
                     chars[i] = s.charAt(i);
                 }
@@ -72,12 +72,34 @@ public class WordLadder2 {
         return graph;
     }
 
-    final List<List<String>> getPaths(String start, String end,
-            HashMap<String, HashSet<String>> graph) {
+    final List<List<String>> trace(String start, String end, HashMap<String, HashSet<String>> graph) {
+        List<List<String>> out = new ArrayList<List<String>>();
+        if (start.equals(end)) {
+            List<String> list = new LinkedList<String>();
+            list.add(end);
+            out.add(list);
+            return out;
+        }
 
+        if (!graph.containsKey(start))
+            return out;
+        for (String s : graph.get(start)) {
+            for (List<String> ls : trace(s, end, graph)) {
+                ls.add(0, start);
+                out.add(ls);
+            }
+        }
+        return out;
     }
 
     public static void main(String[] args) {
         WordLadder2 wl = new WordLadder2();
+        String[] ends = { "hit", "cog" };
+        String[] words = { "hit", "hot", "dot", "dog", "cog", "lot", "log", "bot", "cig", "dut",
+                "dit" };
+        Set<String> dict = new HashSet<String>(Arrays.asList(words));
+
+        List<List<String>> out = wl.findLadders(ends[0], ends[1], dict);
+        System.out.print(out);
     }
 }
