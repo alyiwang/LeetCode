@@ -22,13 +22,13 @@ public class LargestXorPair {
         if (A.length <= 1)
             return 0;
 
-        Node root = new Node();
+        final Node root = new Node();
         for (final int k : A)
             insert(root, k);
 
         int max = 0;
-        for (int t : A) {
-            int p = findPair(root, t);
+        for (final int t : A) {
+            final int p = findPair(root, t);
             max = Math.max(max, t ^ p);
         }
         return max;
@@ -66,9 +66,7 @@ public class LargestXorPair {
     final int findPair(Node r, int a) {
         Node n = r;
 
-        int out = 0, base = 1;
-        for (int i = 0; i < Digits - 2; i++)
-            base *= 2;
+        int out = 0, base = 1 << (Digits - 2);
 
         for (int i = 1; i < Digits; i++) {
             if (n.zero == null || (n.one != null && !digit1(a, i))) {
