@@ -1,6 +1,6 @@
 package problems;
 
-public class sqrtInt {
+public class Sqrt {
     public int sqrt(int x) {
         int l = 0, r = Integer.MAX_VALUE - 1;
         while (l < r) {
@@ -17,7 +17,7 @@ public class sqrtInt {
     }
 
     public static void main(String[] args) {
-        sqrtInt sq = new sqrtInt();
+        Sqrt sq = new Sqrt();
         int a = 100;
         System.out.println("sqrt of " + a + " is " + sq.sqrt(a));
     }
