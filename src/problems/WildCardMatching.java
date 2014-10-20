@@ -3,7 +3,7 @@ package problems;
 public class WildCardMatching {
     public boolean isMatch(String s, String p) {
         final int m = s.length(), n = p.length();
-        int p1 = 0, p2 = 0, star = -1, sstar = -1;
+        int p1 = 0, p2 = 0, star = -1, p1pre = -1;
 
         while (p1 < m) {
             if (p2 < n && (s.charAt(p1) == p.charAt(p2) || p.charAt(p2) == '?')) {
@@ -11,10 +11,10 @@ public class WildCardMatching {
                 p2++;
             } else if (p2 < n && p.charAt(p2) == '*') {
                 star = p2++;
-                sstar = p1;
+                p1pre = p1;
             } else if (star >= 0) {
                 p2 = star + 1;
-                p1 = ++sstar;
+                p1 = ++p1pre;
             } else
                 return false;
         }
