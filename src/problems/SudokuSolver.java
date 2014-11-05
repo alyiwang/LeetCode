@@ -1,5 +1,7 @@
 package problems;
 
+import java.util.Arrays;
+
 public class SudokuSolver {
     public void solveSudoku(char[][] board) {
         if (board == null || board.length != 9 || board[0].length != 9)
@@ -54,10 +56,7 @@ public class SudokuSolver {
                 board[i][j] = sa[i].charAt(j);
         }
         ss.solveSudoku(board);
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++)
-                System.out.print(board[i][j] + ", ");
-            System.out.println();
-        }
+        for (int i = 0; i < 9; i++)
+            System.out.println(Arrays.toString(board[i]));
     }
 }
