@@ -2,23 +2,26 @@ package problems;
 
 public class FirstMissingPositive {
     public int firstMissingPositive(int[] A) {
-        int n = A.length;
-        if (n <= 0)
+        if (A == null || A.length == 0)
             return 1;
-
-        for (int i = 0; i < n; i++) {
-            if (A[i] > 0 && A[i] <= n)
-                if (A[i] != i + 1 && A[A[i] - 1] != A[i]) {
-                    int t = A[i] - 1;
-                    A[i] = A[t];
-                    A[t] = t + 1;
-                    i--;
-                }
+        
+        for (int i = 0; i < A.length; ) {
+            if (A[i] > 0 && A[i] <= A.length && A[A[i] - 1] != A[i])
+                swap(A, i, A[i] - 1);
+            else
+                i++;
         }
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i < A.length; i++) {
             if (A[i] != i + 1)
                 return i + 1;
-        return n + 1;
+        }
+        return A.length + 1;
+    }
+    
+    void swap(int[] A, int i, int j) {
+        int t = A[i];
+        A[i] = A[j];
+        A[j] = t;
     }
 
     public static void main(String[] args) {
