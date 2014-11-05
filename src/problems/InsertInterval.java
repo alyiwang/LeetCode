@@ -32,8 +32,8 @@ public class InsertInterval {
         // remove intervals from p to q - 1
         for (int i = q - 1; i >= p; i--)
             intervals.remove(i);
-
-        intervals.add(p, newInterval); // insert the new interval
+        // insert the new interval
+        intervals.add(p, newInterval);
         return intervals;
     }
 
@@ -50,10 +50,8 @@ public class InsertInterval {
 
         List<Interval> intervals = new ArrayList<Interval>();
         int[] A = { 1, 2, 3, 5, 6, 7, 8, 10, 12, 16 };
-        for (int i = 0; i < A.length / 2; i++) {
-            Interval it = ii.new Interval(A[2 * i], A[2 * i + 1]);
-            intervals.add(it);
-        }
+        for (int i = 0; i < A.length / 2; i++)
+            intervals.add(ii.new Interval(A[2 * i], A[2 * i + 1]));
 
         Interval newInterval = ii.new Interval(4, 9);
         List<Interval> out = ii.insert(intervals, newInterval);
