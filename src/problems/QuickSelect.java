@@ -3,7 +3,7 @@ package problems;
 public class QuickSelect {
     // Select the Kth smallest number in A, average O(n)
     public int select(int[] A, int K) {
-        if (A == null || A.length < K)
+        if (A == null || A.length == 0 || A.length < K)
             return -1;
 
         return quickSelect(A, 0, A.length - 1, K);
