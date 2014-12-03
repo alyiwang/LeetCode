@@ -1,13 +1,16 @@
 package problems;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class LongestConsecutiveSequence {
     public int longestConsecutive(int[] num) {
         if (num == null || num.length == 0)
             return 0;
 
-        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
         for (int k : num)
             map.put(k, 1);
 
@@ -23,6 +26,34 @@ public class LongestConsecutiveSequence {
 
             map.put(k, end - k + 1);
             max = Math.max(max, end - k + 1);
+        }
+        return max;
+    }
+
+    public int longestConsecutive2(int[] num) {
+        if (num == null || num.length == 0)
+            return 0;
+
+        Set<Integer> set = new HashSet<Integer>();
+        for (int k : num)
+            set.add(k);
+
+        int max = 0;
+        for (int k : num) {
+            if (!set.contains(k))
+                continue;
+            int count = 1, next = k + 1;
+            while (set.contains(next)) {
+                count++;
+                set.remove(next++);
+            }
+
+            next = k - 1;
+            while (set.contains(next)) {
+                count++;
+                set.remove(next--);
+            }
+            max = Math.max(max, count);
         }
         return max;
     }
