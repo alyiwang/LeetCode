@@ -2,6 +2,10 @@ package problems;
 
 import java.util.*;
 
+/**
+ * Leetcode: Remove Invalid Parentheses
+ * Created by alan on 2/29/16.
+ */
 public class RemoveInvalidParentheses {
     public List<String> removeInvalidParentheses(String s) {
         List<String> results = new ArrayList<>();
