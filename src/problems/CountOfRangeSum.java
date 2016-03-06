@@ -1,7 +1,5 @@
 package problems;
 
-import java.util.Arrays;
-
 /**
  * LeetCode: Count of Range Sum
  * Created by yiwan on 3/6/16.
